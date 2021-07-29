@@ -1,152 +1,120 @@
-'use strict'
+const { gen_rnd, gen_desc, gen_asc, get_mid, check } = require('./tools')
+const bubble_sort = require('./bubble-sort')
+const quick_sort = require('./quick-sort')
 
-const gen = (count = 10) => {
-    const arr = Array(count)
-    for(let i = 0; i < count; i++) {
-        // arr[i] = Math.random() * count >> 0
-        arr[i] = count - i
-    }
-    return arr
+
+const native_sort = (arr) => {
+    return arr.sort((a, b) => a - b)
 }
 
-const check = (arr) => {
-    for(let i = 0; i < arr.length - 1; i++) {
-        if(arr[i] > arr[i + 1]) {
-            return false
-        }
-    }
-    return true
-}
-
-/**
- * 
- * @param {number[]} arr 
- */
-const bubble_sort = (arr) => {
-    for(let i = 0; i < arr.length - 1; i++) {
-        for(let j = 0; j < arr.length - 1; j++) {
-            const a = arr[j], b = arr[j + 1]
-            if(a > b) {
-                arr[j] = b
-                arr[j + 1] = a
-            }
-        }
-    }
-    return arr
-}
-
-/**
- * 
- * @param {number[]} arr 
- */
-const quick_sort = (arr) => {
-    if(arr.length < 2) {
-        return arr.slice(0)
-    } else if(arr.length === 2) {
-        const [a, b] = arr
-        return a > b ? [b, a] : [a, b]
-    }
-    let left = 0, right = arr.length - 1
-    const pivot = arr[left]
-    // 当右指针指向值>=切分值时，右指针持续左移
-    while(right > left && arr[right] >= pivot) {
-        right -= 1
-    }
-    // 当左右指针未重合时
-    if(left < right) {
-        // 交换左右指针（此时left==0）
-        arr[left] = arr[right]
-        arr[right] = pivot
-        // 左指针右移一位
-        left += 1
-        while(left < right) {
-            if(arr[left] > pivot) {
-                right -= 1
-                const tmp = arr[left]
-                arr[left] = arr[right]
-                arr[right] = tmp
-            } else {
-                left += 1
-            }
-        }
-    } else {
-        // 右侧所有数组不小于切分值（此时left==0）
-        left = 1
-    }
-    const L = arr.slice(0, left)
-    const R = arr.slice(left)
-    return [...quick_sort(L), ...quick_sort(R)]
-}
-
-const profile = (name, sorter, size = 1000) => {
+const profile = (name, sorter, gen, size = 1000) => {
     const arr = gen(size)
     console.time(`${name}_${size}`)
     const sorted = sorter(arr)
     console.timeEnd(`${name}_${size}`)
-    if(!check(sorted)) {
+    if (!check(sorted)) {
         throw `${name}_${size}: 排序结果不通过`
     }
 }
 
-let COUNT = 1000
-
-console.log('-'.repeat(32))
-
-COUNT = 1000
-profile('冒泡排序', bubble_sort, COUNT)
-profile('冒泡排序', bubble_sort, COUNT)
-profile('冒泡排序', bubble_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-
-console.log('-'.repeat(32))
-
-COUNT = 2000
-profile('冒泡排序', bubble_sort, COUNT)
-profile('冒泡排序', bubble_sort, COUNT)
-profile('冒泡排序', bubble_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-
-console.log('-'.repeat(32))
-
-COUNT = 5000
-profile('冒泡排序', bubble_sort, COUNT)
-profile('冒泡排序', bubble_sort, COUNT)
-profile('冒泡排序', bubble_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-profile('快速排序', quick_sort, COUNT)
-
-console.log('-'.repeat(32))
-
-// COUNT = 10000
-// profile('冒泡排序', bubble_sort, COUNT)
-// profile('冒泡排序', bubble_sort, COUNT)
-// profile('冒泡排序', bubble_sort, COUNT)
-// profile('快速排序', quick_sort, COUNT)
-// profile('快速排序', quick_sort, COUNT)
-// profile('快速排序', quick_sort, COUNT)
-
-// console.log('-'.repeat(32))
-
-// COUNT = 20000
-// profile('冒泡排序', bubble_sort, COUNT)
-// profile('冒泡排序', bubble_sort, COUNT)
-// profile('冒泡排序', bubble_sort, COUNT)
-// profile('快速排序', quick_sort, COUNT)
-// profile('快速排序', quick_sort, COUNT)
-// profile('快速排序', quick_sort, COUNT)
-
-// console.log('-'.repeat(32))
 
 
+const main = () => {
+    // console.log('='.repeat(48))
+    console.log('-'.repeat(48))
 
+        ; ([
+            1000,
+            2000,
+            5000,
+            10000,
+            20000,
+            100000,
+            1000000,
+        ]).forEach(count => {
+            // profile('【冒泡】排序1轮-随机数组', bubble_sort, gen_rnd, count)
+            // profile('【冒泡】排序2轮-随机数组', bubble_sort, gen_rnd, count)
+            // console.log('-'.repeat(48))
+            // profile('【冒泡】排序1轮-倒序数组', bubble_sort, gen_desc, count)
+            // profile('【冒泡】排序2轮-倒序数组', bubble_sort, gen_desc, count)
+            // console.log('-'.repeat(48))
+            // profile('【冒泡】排序1轮-正序数组', bubble_sort, gen_asc, count)
+            // profile('【冒泡】排序2轮-正序数组', bubble_sort, gen_asc, count)
+            // console.log('-'.repeat(48))
+
+            // profile('【快速】排序1轮-随机数组', quick_sort, gen_rnd, count)
+            // profile('【快速】排序2轮-随机数组', quick_sort, gen_rnd, count)
+            // console.log('-'.repeat(48))
+            // profile('【快速】排序1轮-倒序数组', quick_sort, gen_desc, count)
+            // profile('【快速】排序2轮-倒序数组', quick_sort, gen_desc, count)
+            // console.log('-'.repeat(48))
+            profile('【快速】排序1轮-正序数组', quick_sort, gen_asc, count)
+            profile('【快速】排序2轮-正序数组', quick_sort, gen_asc, count)
+            console.log('-'.repeat(48))
+
+            // profile('【分治】排序1轮-随机数组', map_sort, gen_rnd, count)
+            // profile('【分治】排序2轮-随机数组', map_sort, gen_rnd, count)
+            // console.log('-'.repeat(48))
+            // profile('【分治】排序1轮-倒序数组', map_sort, gen_desc, count)
+            // profile('【分治】排序2轮-倒序数组', map_sort, gen_desc, count)
+            // console.log('-'.repeat(48))
+            // profile('【分治】排序1轮-正序数组', map_sort, gen_asc, count)
+            // profile('【分治】排序2轮-正序数组', map_sort, gen_asc, count)
+            // console.log('-'.repeat(48))
+
+            // profile('【原生】排序1轮-随机数组', native_sort, gen_rnd, count)
+            // profile('【原生】排序2轮-随机数组', native_sort, gen_rnd, count)
+            // console.log('-'.repeat(48))
+            // profile('【原生】排序1轮-倒序数组', native_sort, gen_desc, count)
+            // profile('【原生】排序2轮-倒序数组', native_sort, gen_desc, count)
+            // console.log('-'.repeat(48))
+            // profile('【原生】排序1轮-正序数组', native_sort, gen_asc, count)
+            // profile('【原生】排序2轮-正序数组', native_sort, gen_asc, count)
+            // console.log('-'.repeat(48))
+
+            // console.log('='.repeat(48))
+        })
+}
+
+
+
+
+
+main()
+
+
+// console.log(quick_sort([1,1]))
 // console.log(quick_sort([4,6,7,1,2,3,8,5]))
-// console.log(quick_sort([1,1,1,13,1,1,1,111,2,4]))
+// console.log(quick_sort([1,13,1,111,2,4]))
 // console.log(quick_sort([9,3,1,2,4]))
+// console.log(quick_sort([3,2]))
 // console.log(quick_sort([3,5,2,4]))
-// console.log(quick_sort([2,5,3,4]))
-// console.log(quick_sort(gen(10000)))
+// console.log(quick_sort([2, 2, 2, 5, 2, 1, 3, 4]))
+// console.log(quick_sort([
+//     2, 2, 5, 2,
+//     2, 3, 4
+// ]))
+// console.log(quick_sort([ 2, 2 ]))
+// console.log(quick_sort([2,1]))
+// console.log(quick_sort([1,2]))
+// console.log(quick_sort([2, 1, 3]))
+// console.log(quick_sort([1,2,3]))
+// console.log(quick_sort([3,1,2]))
+// console.log(quick_sort([3, 2, 1]))
+// console.log(quick_sort([1, 2, 1, 3]))
+// console.log(quick_sort([1, 1, 2, 1, 1, 1, 1, 1, 3, 5, 2, 7, 1, 1, 1]))
+// console.log(map_sort([
+//     1, 1, 1, 3, 5,
+//     2, 7, 2, 1, 1
+// ]))
+// console.log(quick_sort(gen(1000)))
+
+const sum = (n) => {
+    if(n > 1) {
+        return n + sum(n - 1)
+    } else {
+        return n
+    }
+}
+
+// console.log(sum(10469))
