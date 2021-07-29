@@ -1,0 +1,23 @@
+{
+  "name": "js-sort",
+  "version": "1.0.0",
+  "description": "javascript sort",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imnull/js-sort.git"
+  },
+  "keywords": [
+    "javascript",
+    "sort"
+  ],
+  "author": "imnull@outlook.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imnull/js-sort/issues"
+  },
+  "homepage": "https://github.com/imnull/js-sort#readme"
+}
