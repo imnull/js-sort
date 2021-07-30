@@ -17,7 +17,7 @@ const gen_desc = (count = 10) => {
 const gen_asc = (count = 10) => {
     const arr = Array(count)
     for (let i = 0; i < count; i++) {
-        arr[i] = i + i
+        arr[i] = i + 1
     }
     return arr
 }
