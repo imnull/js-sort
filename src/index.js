@@ -1,6 +1,7 @@
 const { gen_rnd, gen_desc, gen_asc, get_mid, check } = require('./tools')
 const bubble_sort = require('./bubble-sort')
-const quick_sort = require('./quick-sort3')
+const quick_sort = require('./quick-sort')
+const quick_sort3 = require('./quick-sort3')
 
 
 const native_sort = (arr) => {
@@ -29,11 +30,11 @@ const main = () => {
             1000,
             2000,
             5000,
-            10000,
-            20000,
-            100000,
-            1000000,
-            10000000,
+            // 10000,
+            // 20000,
+            // 100000,
+            // 1000000,
+            // 10000000,
         ]).forEach(count => {
             // profile('【冒泡】排序1轮-随机数组', bubble_sort, gen_rnd, count)
             // profile('【冒泡】排序2轮-随机数组', bubble_sort, gen_rnd, count)
@@ -55,25 +56,25 @@ const main = () => {
             profile('【快速】排序2轮-正序数组', quick_sort, gen_asc, count)
             console.log('-'.repeat(48))
 
-            // profile('【分治】排序1轮-随机数组', map_sort, gen_rnd, count)
-            // profile('【分治】排序2轮-随机数组', map_sort, gen_rnd, count)
-            // console.log('-'.repeat(48))
-            // profile('【分治】排序1轮-倒序数组', map_sort, gen_desc, count)
-            // profile('【分治】排序2轮-倒序数组', map_sort, gen_desc, count)
-            // console.log('-'.repeat(48))
-            // profile('【分治】排序1轮-正序数组', map_sort, gen_asc, count)
-            // profile('【分治】排序2轮-正序数组', map_sort, gen_asc, count)
-            // console.log('-'.repeat(48))
+            profile('【快速优化】排序1轮-随机数组', quick_sort3, gen_rnd, count)
+            profile('【快速优化】排序2轮-随机数组', quick_sort3, gen_rnd, count)
+            console.log('-'.repeat(48))
+            profile('【快速优化】排序1轮-倒序数组', quick_sort3, gen_desc, count)
+            profile('【快速优化】排序2轮-倒序数组', quick_sort3, gen_desc, count)
+            console.log('-'.repeat(48))
+            profile('【快速优化】排序1轮-正序数组', quick_sort3, gen_asc, count)
+            profile('【快速优化】排序2轮-正序数组', quick_sort3, gen_asc, count)
+            console.log('-'.repeat(48))
 
-            profile('【原生】排序1轮-随机数组', native_sort, gen_rnd, count)
-            profile('【原生】排序2轮-随机数组', native_sort, gen_rnd, count)
-            console.log('-'.repeat(48))
-            profile('【原生】排序1轮-倒序数组', native_sort, gen_desc, count)
-            profile('【原生】排序2轮-倒序数组', native_sort, gen_desc, count)
-            console.log('-'.repeat(48))
-            profile('【原生】排序1轮-正序数组', native_sort, gen_asc, count)
-            profile('【原生】排序2轮-正序数组', native_sort, gen_asc, count)
-            console.log('-'.repeat(48))
+            // profile('【原生】排序1轮-随机数组', native_sort, gen_rnd, count)
+            // profile('【原生】排序2轮-随机数组', native_sort, gen_rnd, count)
+            // console.log('-'.repeat(48))
+            // profile('【原生】排序1轮-倒序数组', native_sort, gen_desc, count)
+            // profile('【原生】排序2轮-倒序数组', native_sort, gen_desc, count)
+            // console.log('-'.repeat(48))
+            // profile('【原生】排序1轮-正序数组', native_sort, gen_asc, count)
+            // profile('【原生】排序2轮-正序数组', native_sort, gen_asc, count)
+            // console.log('-'.repeat(48))
 
             console.log('='.repeat(48))
         })

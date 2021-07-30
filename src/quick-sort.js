@@ -2,8 +2,7 @@
  * 
  * @param {number[]} arr 
  */
-const partition = (arr) => {
-    let left = 0, right = arr.length - 1
+const partition = (arr, left, right) => {
     const pivot = arr[left]
     while (left < right) {
         while (left < right && arr[right] >= pivot) {
@@ -25,14 +24,13 @@ const partition = (arr) => {
  * @param {number} right 
  * @returns 
  */
-const quick_sort = (arr) => {
-    if(arr.length < 2) {
-        return arr
+const quick_sort = (arr, left = 0, right = arr.length - 1) => {
+    if (left < right) {
+        const middle = partition(arr, left, right);
+        quick_sort(arr, left, middle - 1);
+        quick_sort(arr, middle + 1, right);
     }
-    const middle = partition(arr)
-    const left = quick_sort(arr.slice(0, middle))
-    const right = quick_sort(arr.slice(middle + 1))
-    return [ ...left, arr[middle], ...right ]
+    return arr
 }
 
 module.exports = quick_sort
